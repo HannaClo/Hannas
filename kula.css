@@ -1,0 +1,70 @@
+html, body {
+    margin: 0; height: 100%; overflow: hidden;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    color: #cfc8ff; background: #06040e; touch-action: none;
+}
+canvas { display: block; touch-action: none; }
+#hud {
+    position: fixed; left: 14px; top: 12px; font-size: 13px;
+    line-height: 1.55; white-space: pre; pointer-events: none;
+    text-shadow: 0 0 6px #000; color: #cfc8ff; z-index: 2;
+}
+#info {
+    position: fixed; left: 460px; top: 50px; font-size: 40px;
+    line-height: 1.55; white-space: pre; pointer-events: none;
+    text-shadow: 0 0 6px #000; color: #cfc8ff; z-index: 2;
+}
+body.intro #hud, body.intro #info { visibility: hidden; }
+
+/* Nedtoning till svart när världen är genomgången (styrs av kula.js) */
+#fade { position: fixed; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 8; }
+
+/* ---------- Startsida (samma uppbyggnad som Vattenvärlden, friktionens färger) ---------- */
+#start {
+    font-family: "Avenir Next", "Segoe UI", sans-serif;
+    position: fixed; inset: 0; z-index: 10; display: flex;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 16px; text-align: center; padding: 30px 20px; box-sizing: border-box;
+    overflow-y: auto; color: #e3dcff;
+    background: radial-gradient(ellipse at 50% 45%, #2a0f3c 0%, #06040e 72%);
+    transition: opacity .9s;
+}
+#start.leaving { opacity: 0; pointer-events: none; }
+#start h1 {
+    margin: 0; font-size: clamp(36px, 5vw, 64px); font-weight: 500; letter-spacing: .015em;
+    color: #ff3df2; text-shadow: 0 0 18px #ff3df2aa, 0 0 40px #ff3df255;
+}
+.start-world { color: #19e6ff; font: 13px ui-monospace, Menlo, monospace; letter-spacing: .35em; }
+.start-steps {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    width: min(820px, 100%); margin: 24px 0 16px;
+}
+.start-step {
+    padding: 26px 20px; min-height: 170px; box-sizing: border-box;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    border: 1px solid #4a2670; background: rgba(22, 8, 36, .65);
+}
+.step-number { color: #19e6ff; font: 12px ui-monospace, monospace; letter-spacing: .15em; }
+.start-step strong { color: #ff3df2; font-size: 15px; letter-spacing: .1em; }
+.start-step span:not(.step-number) { color: #e3dcff; font-size: 17px; line-height: 1.55; }
+.start-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+#start button {
+    font: inherit; font-size: 15px; font-weight: bold; letter-spacing: .12em;
+    padding: 15px 34px; border: 2px solid #19e6ff; background: transparent;
+    color: #19e6ff; cursor: pointer; border-radius: 3px;
+    transition: background .2s, color .2s, box-shadow .2s;
+}
+#start button:hover, #start button:focus-visible {
+    background: #19e6ff; color: #06040e; box-shadow: 0 0 24px #19e6ff66; outline: none;
+}
+
+#err { color: #ffb86b; font: 12px ui-monospace, monospace; }
+
+@media (max-width: 700px) {
+    #info { left: 14px; top: 150px; font-size: 25px; }
+}
+@media (max-width: 600px) {
+    #start { justify-content: flex-start; padding-top: 36px; gap: 13px; }
+    .start-steps { grid-template-columns: 1fr; max-width: 360px; gap: 8px; }
+    .start-step { padding: 16px; min-height: auto; gap: 8px; }
+}
